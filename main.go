@@ -15,8 +15,8 @@ func main() {
 	r.POST("/order", controllers.CreateOrder)
 	r.GET("/orders", controllers.GetAllOrder)
 	r.GET("/order/:order_id", controllers.GetOrderById)
-	r.PUT("/order/:id", controllers.UpdateOrder)
-	r.DELETE("/order/:id", controllers.DeleteOrder)
+	r.PUT("/order/:order_id", controllers.UpdateOrder)
+	r.DELETE("/order/:order_id", controllers.DeleteOrder)
 
 	r.Run()
 }
