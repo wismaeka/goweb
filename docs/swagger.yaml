@@ -1,0 +1,142 @@
+basePath: /api/v1
+definitions:
+  models.Item:
+    properties:
+      description:
+        type: string
+      item_code:
+        type: string
+      item_id:
+        type: integer
+      quantity:
+        type: integer
+    type: object
+  models.Order:
+    properties:
+      customer_name:
+        type: string
+      items:
+        items:
+          $ref: '#/definitions/models.Item'
+        type: array
+      order_at:
+        type: string
+      order_id:
+        type: integer
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: wisma@gmail.com
+    name: Orders.Support
+  description: This is a basic API To Make Order of Items using Gin and Gorm.
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  title: Orders API
+  version: "1.0"
+paths:
+  /order:
+    post:
+      consumes:
+      - application/json
+      description: Add by JSON Order
+      parameters:
+      - description: Add Order
+        in: body
+        name: order
+        required: true
+        schema:
+          $ref: '#/definitions/models.Order'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Order'
+      summary: Create order data
+      tags:
+      - order
+  /order/{order_id}:
+    delete:
+      consumes:
+      - application/json
+      operationId: get-string-by-int
+      parameters:
+      - description: Order ID
+        in: path
+        name: order_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Order'
+      summary: Delete order including items by order id
+      tags:
+      - order
+    get:
+      consumes:
+      - application/json
+      operationId: get-string-by-int
+      parameters:
+      - description: Order ID
+        in: path
+        name: order_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Order'
+      summary: Show order detail including items based on Order Id
+      tags:
+      - orders
+    put:
+      consumes:
+      - application/json
+      description: Update by JSON Order
+      parameters:
+      - description: Order Id
+        in: path
+        name: order_id
+        required: true
+        type: integer
+      - description: Update Order
+        in: body
+        name: order
+        required: true
+        schema:
+          $ref: '#/definitions/models.Order'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Order'
+      summary: Update order or items by OrderId
+      tags:
+      - order
+  /orders:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Order'
+      summary: Show a list of orders including the items
+      tags:
+      - orders
+swagger: "2.0"

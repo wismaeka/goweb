@@ -1,0 +1,216 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a basic API To Make Order of Items using Gin and Gorm.",
+        "title": "Orders API",
+        "contact": {
+            "name": "Orders.Support",
+            "email": "wisma@gmail.com"
+        },
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/api/v1",
+    "paths": {
+        "/order": {
+            "post": {
+                "description": "Add by JSON Order",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "order"
+                ],
+                "summary": "Create order data",
+                "parameters": [
+                    {
+                        "description": "Add Order",
+                        "name": "order",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Order"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Order"
+                        }
+                    }
+                }
+            }
+        },
+        "/order/{order_id}": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "orders"
+                ],
+                "summary": "Show order detail including items based on Order Id",
+                "operationId": "get-string-by-int",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Order ID",
+                        "name": "order_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Order"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Update by JSON Order",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "order"
+                ],
+                "summary": "Update order or items by OrderId",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Order Id",
+                        "name": "order_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Update Order",
+                        "name": "order",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Order"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Order"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "order"
+                ],
+                "summary": "Delete order including items by order id",
+                "operationId": "get-string-by-int",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Order ID",
+                        "name": "order_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Order"
+                        }
+                    }
+                }
+            }
+        },
+        "/orders": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "orders"
+                ],
+                "summary": "Show a list of orders including the items",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Order"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.Item": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "item_code": {
+                    "type": "string"
+                },
+                "item_id": {
+                    "type": "integer"
+                },
+                "quantity": {
+                    "type": "integer"
+                }
+            }
+        },
+        "models.Order": {
+            "type": "object",
+            "properties": {
+                "customer_name": {
+                    "type": "string"
+                },
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.Item"
+                    }
+                },
+                "order_at": {
+                    "type": "string"
+                },
+                "order_id": {
+                    "type": "integer"
+                }
+            }
+        }
+    }
+}
